@@ -1,0 +1,11 @@
+com/myproject/ssm/crm/dao/test/SysUserGroupTest.class
+com/myproject/ssm/common/dal/test/DalUserTest.class
+com/myproject/ssm/crm/dao/test/SysRoleTest.class
+com/myproject/ssm/common/dal/test/ServiceUserTest.class
+com/myproject/ssm/common/dal/test/SysPopedomTest.class
+com/myproject/ssm/crm/dao/test/SysMenuTest.class
+com/myproject/ssm/crm/service/test/SysMenuPrivilegeServiceTest.class
+com/myproject/ssm/common/dal/test/SysUserGrouptest.class
+com/myproject/ssm/common/dal/test/SysPopedomPrivilegeTest.class
+com/myproject/ssm/crm/dao/test/SysMenuPrivilegeTest.class
+com/myproject/ssm/crm/dao/test/SysUserTest.class

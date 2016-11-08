@@ -1,0 +1,688 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myproject.ssm.crm.dal.SysUserDAO" >
+  <resultMap id="BaseResultMap" type="com.myproject.ssm.crm.dal.common.object.SysUserDO" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="updater" property="updater" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="cn_name" property="cnName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="begin_date" property="beginDate" jdbcType="DATE" />
+    <result column="end_date" property="endDate" jdbcType="DATE" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <result column="group_id" property="groupId" jdbcType="INTEGER" />
+    <result column="access_file_level" property="accessFileLevel" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="commend_man" property="commendMan" jdbcType="VARCHAR" />
+    <result column="move_telephone" property="moveTelephone" jdbcType="VARCHAR" />
+    <result column="now_address" property="nowAddress" jdbcType="VARCHAR" />
+    <result column="now_telephone" property="nowTelephone" jdbcType="VARCHAR" />
+    <result column="identity_code" property="identityCode" jdbcType="VARCHAR" />
+    <result column="insurance_code" property="insuranceCode" jdbcType="VARCHAR" />
+    <result column="instancy_linkman" property="instancyLinkman" jdbcType="VARCHAR" />
+    <result column="instancy_telephone" property="instancyTelephone" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="personnel_type" property="personnelType" jdbcType="VARCHAR" />
+    <result column="duty" property="duty" jdbcType="VARCHAR" />
+    <result column="work_date" property="workDate" jdbcType="DATE" />
+    <result column="high_school" property="highSchool" jdbcType="VARCHAR" />
+    <result column="finish_school" property="finishSchool" jdbcType="VARCHAR" />
+    <result column="finish_school_date" property="finishSchoolDate" jdbcType="DATE" />
+    <result column="consort_name" property="consortName" jdbcType="VARCHAR" />
+    <result column="youngone_name" property="youngoneName" jdbcType="VARCHAR" />
+    <result column="office_telephone" property="officeTelephone" jdbcType="VARCHAR" />
+    <result column="consort_telephone" property="consortTelephone" jdbcType="VARCHAR" />
+    <result column="consort_company" property="consortCompany" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myproject.ssm.crm.dal.common.object.SysUserDOWithBLOBs" extends="BaseResultMap" >
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+    <result column="avocation" property="avocation" jdbcType="LONGVARCHAR" />
+    <result column="strong_suit" property="strongSuit" jdbcType="LONGVARCHAR" />
+    <result column="comm_uni_cate" property="commUniCate" jdbcType="LONGVARCHAR" />
+    <result column="bringup" property="bringup" jdbcType="LONGVARCHAR" />
+    <result column="organization" property="organization" jdbcType="LONGVARCHAR" />
+    <result column="analyse" property="analyse" jdbcType="LONGVARCHAR" />
+    <result column="planing" property="planing" jdbcType="LONGVARCHAR" />
+    <result column="empolder" property="empolder" jdbcType="LONGVARCHAR" />
+    <result column="relation" property="relation" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, creator, create_time, updater, update_time, name, cn_name, password, address, 
+    telephone, email, begin_date, end_date, role_id, group_id, access_file_level, status, 
+    commend_man, move_telephone, now_address, now_telephone, identity_code, insurance_code, instancy_linkman, 
+    instancy_telephone, sex, birthday, personnel_type, duty, work_date, high_school, 
+    finish_school, finish_school_date, consort_name, youngone_name, office_telephone, 
+    consort_telephone, consort_company
+  </sql>
+  <sql id="Blob_Column_List" >
+    remark, avocation, strong_suit, comm_uni_cate, bringup, organization, analyse, planing, 
+    empolder, relation
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.myproject.ssm.crm.dal.common.object.SysUserDOWithBLOBs" >
+    insert into sys_user (id, creator, create_time, 
+      updater, update_time, name, 
+      cn_name, password, address, 
+      telephone, email, begin_date, 
+      end_date, role_id, group_id, 
+      access_file_level, status, commend_man, 
+      move_telephone, now_address, now_telephone, 
+      identity_code, insurance_code, instancy_linkman, 
+      instancy_telephone, sex, birthday, 
+      personnel_type, duty, work_date, 
+      high_school, finish_school, finish_school_date, 
+      consort_name, youngone_name, office_telephone, 
+      consort_telephone, consort_company, remark, 
+      avocation, strong_suit, comm_uni_cate, 
+      bringup, organization, analyse, 
+      planing, empolder, relation
+      )
+    values (#{id,jdbcType=INTEGER}, #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{updater,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{cnName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{telephone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{beginDate,jdbcType=DATE}, 
+      #{endDate,jdbcType=DATE}, #{roleId,jdbcType=VARCHAR}, #{groupId,jdbcType=INTEGER}, 
+      #{accessFileLevel,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{commendMan,jdbcType=VARCHAR}, 
+      #{moveTelephone,jdbcType=VARCHAR}, #{nowAddress,jdbcType=VARCHAR}, #{nowTelephone,jdbcType=VARCHAR}, 
+      #{identityCode,jdbcType=VARCHAR}, #{insuranceCode,jdbcType=VARCHAR}, #{instancyLinkman,jdbcType=VARCHAR}, 
+      #{instancyTelephone,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, 
+      #{personnelType,jdbcType=VARCHAR}, #{duty,jdbcType=VARCHAR}, #{workDate,jdbcType=DATE}, 
+      #{highSchool,jdbcType=VARCHAR}, #{finishSchool,jdbcType=VARCHAR}, #{finishSchoolDate,jdbcType=DATE}, 
+      #{consortName,jdbcType=VARCHAR}, #{youngoneName,jdbcType=VARCHAR}, #{officeTelephone,jdbcType=VARCHAR}, 
+      #{consortTelephone,jdbcType=VARCHAR}, #{consortCompany,jdbcType=VARCHAR}, #{remark,jdbcType=LONGVARCHAR}, 
+      #{avocation,jdbcType=LONGVARCHAR}, #{strongSuit,jdbcType=LONGVARCHAR}, #{commUniCate,jdbcType=LONGVARCHAR}, 
+      #{bringup,jdbcType=LONGVARCHAR}, #{organization,jdbcType=LONGVARCHAR}, #{analyse,jdbcType=LONGVARCHAR}, 
+      #{planing,jdbcType=LONGVARCHAR}, #{empolder,jdbcType=LONGVARCHAR}, #{relation,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myproject.ssm.crm.dal.common.object.SysUserDOWithBLOBs" >
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="cnName != null" >
+        cn_name,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="beginDate != null" >
+        begin_date,
+      </if>
+      <if test="endDate != null" >
+        end_date,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="groupId != null" >
+        group_id,
+      </if>
+      <if test="accessFileLevel != null" >
+        access_file_level,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="commendMan != null" >
+        commend_man,
+      </if>
+      <if test="moveTelephone != null" >
+        move_telephone,
+      </if>
+      <if test="nowAddress != null" >
+        now_address,
+      </if>
+      <if test="nowTelephone != null" >
+        now_telephone,
+      </if>
+      <if test="identityCode != null" >
+        identity_code,
+      </if>
+      <if test="insuranceCode != null" >
+        insurance_code,
+      </if>
+      <if test="instancyLinkman != null" >
+        instancy_linkman,
+      </if>
+      <if test="instancyTelephone != null" >
+        instancy_telephone,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="personnelType != null" >
+        personnel_type,
+      </if>
+      <if test="duty != null" >
+        duty,
+      </if>
+      <if test="workDate != null" >
+        work_date,
+      </if>
+      <if test="highSchool != null" >
+        high_school,
+      </if>
+      <if test="finishSchool != null" >
+        finish_school,
+      </if>
+      <if test="finishSchoolDate != null" >
+        finish_school_date,
+      </if>
+      <if test="consortName != null" >
+        consort_name,
+      </if>
+      <if test="youngoneName != null" >
+        youngone_name,
+      </if>
+      <if test="officeTelephone != null" >
+        office_telephone,
+      </if>
+      <if test="consortTelephone != null" >
+        consort_telephone,
+      </if>
+      <if test="consortCompany != null" >
+        consort_company,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="avocation != null" >
+        avocation,
+      </if>
+      <if test="strongSuit != null" >
+        strong_suit,
+      </if>
+      <if test="commUniCate != null" >
+        comm_uni_cate,
+      </if>
+      <if test="bringup != null" >
+        bringup,
+      </if>
+      <if test="organization != null" >
+        organization,
+      </if>
+      <if test="analyse != null" >
+        analyse,
+      </if>
+      <if test="planing != null" >
+        planing,
+      </if>
+      <if test="empolder != null" >
+        empolder,
+      </if>
+      <if test="relation != null" >
+        relation,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="cnName != null" >
+        #{cnName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="beginDate != null" >
+        #{beginDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null" >
+        #{endDate,jdbcType=DATE},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="accessFileLevel != null" >
+        #{accessFileLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="commendMan != null" >
+        #{commendMan,jdbcType=VARCHAR},
+      </if>
+      <if test="moveTelephone != null" >
+        #{move_telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="nowAddress != null" >
+        #{nowAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="nowTelephone != null" >
+        #{nowTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="identityCode != null" >
+        #{identityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceCode != null" >
+        #{insuranceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="instancyLinkman != null" >
+        #{instancyLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="instancyTelephone != null" >
+        #{instancyTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="personnelType != null" >
+        #{personnelType,jdbcType=VARCHAR},
+      </if>
+      <if test="duty != null" >
+        #{duty,jdbcType=VARCHAR},
+      </if>
+      <if test="workDate != null" >
+        #{workDate,jdbcType=DATE},
+      </if>
+      <if test="highSchool != null" >
+        #{highSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="finishSchool != null" >
+        #{finishSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="finishSchoolDate != null" >
+        #{finishSchoolDate,jdbcType=DATE},
+      </if>
+      <if test="consortName != null" >
+        #{consortName,jdbcType=VARCHAR},
+      </if>
+      <if test="youngoneName != null" >
+        #{youngoneName,jdbcType=VARCHAR},
+      </if>
+      <if test="officeTelephone != null" >
+        #{officeTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="consortTelephone != null" >
+        #{consortTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="consortCompany != null" >
+        #{consortCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="avocation != null" >
+        #{avocation,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="strongSuit != null" >
+        #{strongSuit,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="commUniCate != null" >
+        #{commUniCate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bringup != null" >
+        #{bringup,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="organization != null" >
+        #{organization,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="analyse != null" >
+        #{analyse,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="planing != null" >
+        #{planing,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="empolder != null" >
+        #{empolder,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="relation != null" >
+        #{relation,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myproject.ssm.crm.dal.common.object.SysUserDOWithBLOBs" >
+    update sys_user
+    <set >
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="cnName != null" >
+        cn_name = #{cnName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="beginDate != null" >
+        begin_date = #{beginDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null" >
+        end_date = #{endDate,jdbcType=DATE},
+      </if>
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null" >
+        group_id = #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="accessFileLevel != null" >
+        access_file_level = #{accessFileLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="commendMan != null" >
+        commend_man = #{commendMan,jdbcType=VARCHAR},
+      </if>
+      <if test="moveTelephone != null" >
+        move_telephone = #{moveTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="nowAddress != null" >
+        now_address = #{nowAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="nowTelephone != null" >
+        now_telephone = #{nowTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="identityCode != null" >
+        identity_code = #{identityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceCode != null" >
+        insurance_code = #{insuranceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="instancyLinkman != null" >
+        instancy_linkman = #{instancyLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="instancyTelephone != null" >
+        instancy_telephone = #{instancyTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="personnelType != null" >
+        personnel_type = #{personnelType,jdbcType=VARCHAR},
+      </if>
+      <if test="duty != null" >
+        duty = #{duty,jdbcType=VARCHAR},
+      </if>
+      <if test="workDate != null" >
+        work_date = #{workDate,jdbcType=DATE},
+      </if>
+      <if test="highSchool != null" >
+        high_school = #{highSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="finishSchool != null" >
+        finish_school = #{finishSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="finishSchoolDate != null" >
+        finish_school_date = #{finishSchoolDate,jdbcType=DATE},
+      </if>
+      <if test="consortName != null" >
+        consort_name = #{consortName,jdbcType=VARCHAR},
+      </if>
+      <if test="youngoneName != null" >
+        youngone_name = #{youngoneName,jdbcType=VARCHAR},
+      </if>
+      <if test="officeTelephone != null" >
+        office_telephone = #{officeTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="consortTelephone != null" >
+        consort_telephone = #{consortTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="consortCompany != null" >
+        consort_company = #{consortCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="avocation != null" >
+        avocation = #{avocation,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="strongSuit != null" >
+        strong_suit = #{strongSuit,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="commUniCate != null" >
+        comm_uni_cate = #{commUniCate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bringup != null" >
+        bringup = #{bringup,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="organization != null" >
+        organization = #{organization,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="analyse != null" >
+        analyse = #{analyse,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="planing != null" >
+        planing = #{planing,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="empolder != null" >
+        empolder = #{empolder,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="relation != null" >
+        relation = #{relation,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.myproject.ssm.crm.dal.common.object.SysUserDOWithBLOBs" >
+    update sys_user
+    set creator = #{creator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      cn_name = #{cnName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      begin_date = #{beginDate,jdbcType=DATE},
+      end_date = #{endDate,jdbcType=DATE},
+      role_id = #{roleId,jdbcType=VARCHAR},
+      group_id = #{groupId,jdbcType=INTEGER},
+      access_file_level = #{accessFileLevel,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      commend_man = #{commendMan,jdbcType=VARCHAR},
+      move_telephone = #{moveTelephone,jdbcType=VARCHAR},
+      now_address = #{nowAddress,jdbcType=VARCHAR},
+      now_telephone = #{nowTelephone,jdbcType=VARCHAR},
+      identity_code = #{identityCode,jdbcType=VARCHAR},
+      insurance_code = #{insuranceCode,jdbcType=VARCHAR},
+      instancy_linkman = #{instancyLinkman,jdbcType=VARCHAR},
+      instancy_telephone = #{instancyTelephone,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      personnel_type = #{personnelType,jdbcType=VARCHAR},
+      duty = #{duty,jdbcType=VARCHAR},
+      work_date = #{workDate,jdbcType=DATE},
+      high_school = #{highSchool,jdbcType=VARCHAR},
+      finish_school = #{finishSchool,jdbcType=VARCHAR},
+      finish_school_date = #{finishSchoolDate,jdbcType=DATE},
+      consort_name = #{consortName,jdbcType=VARCHAR},
+      youngone_name = #{youngoneName,jdbcType=VARCHAR},
+      office_telephone = #{officeTelephone,jdbcType=VARCHAR},
+      consort_telephone = #{consortTelephone,jdbcType=VARCHAR},
+      consort_company = #{consortCompany,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=LONGVARCHAR},
+      avocation = #{avocation,jdbcType=LONGVARCHAR},
+      strong_suit = #{strongSuit,jdbcType=LONGVARCHAR},
+      comm_uni_cate = #{commUniCate,jdbcType=LONGVARCHAR},
+      bringup = #{bringup,jdbcType=LONGVARCHAR},
+      organization = #{organization,jdbcType=LONGVARCHAR},
+      analyse = #{analyse,jdbcType=LONGVARCHAR},
+      planing = #{planing,jdbcType=LONGVARCHAR},
+      empolder = #{empolder,jdbcType=LONGVARCHAR},
+      relation = #{relation,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.myproject.ssm.crm.dal.common.object.SysUserDO" >
+    update sys_user
+    set creator = #{creator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      cn_name = #{cnName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      begin_date = #{beginDate,jdbcType=DATE},
+      end_date = #{endDate,jdbcType=DATE},
+      role_id = #{roleId,jdbcType=VARCHAR},
+      group_id = #{groupId,jdbcType=INTEGER},
+      access_file_level = #{accessFileLevel,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      commend_man = #{commendMan,jdbcType=VARCHAR},
+      move_telephone = #{moveTelephone,jdbcType=VARCHAR},
+      now_address = #{nowAddress,jdbcType=VARCHAR},
+      now_telephone = #{nowTelephone,jdbcType=VARCHAR},
+      identity_code = #{identityCode,jdbcType=VARCHAR},
+      insurance_code = #{insuranceCode,jdbcType=VARCHAR},
+      instancy_linkman = #{instancyLinkman,jdbcType=VARCHAR},
+      instancy_telephone = #{instancyTelephone,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      personnel_type = #{personnelType,jdbcType=VARCHAR},
+      duty = #{duty,jdbcType=VARCHAR},
+      work_date = #{workDate,jdbcType=DATE},
+      high_school = #{highSchool,jdbcType=VARCHAR},
+      finish_school = #{finishSchool,jdbcType=VARCHAR},
+      finish_school_date = #{finishSchoolDate,jdbcType=DATE},
+      consort_name = #{consortName,jdbcType=VARCHAR},
+      youngone_name = #{youngoneName,jdbcType=VARCHAR},
+      office_telephone = #{officeTelephone,jdbcType=VARCHAR},
+      consort_telephone = #{consortTelephone,jdbcType=VARCHAR},
+      consort_company = #{consortCompany,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="findSysUserByNameAndPassword"  resultMap="ResultMapWithBLOBs">
+  	select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_user
+    where name = #{name} and password=#{pwd}
+  </select>
+  
+  <select id="getAllSysUsers" resultMap="ResultMapWithBLOBs">
+  	select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_user
+  </select>
+  
+  <delete id="deleteSysUsers">
+  	delete from sys_user
+    where id in
+	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		#{item}
+    </foreach>
+  </delete>
+  
+  <update id="updateUserStatus" parameterType="java.util.Map">
+  	update sys_user
+  	set status = #{status,jdbcType=VARCHAR}
+  	where id in 
+  	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		#{item}
+    </foreach>	
+  </update>
+  
+  
+</mapper>

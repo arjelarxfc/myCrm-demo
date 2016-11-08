@@ -1,0 +1,37 @@
+body{
+    text-align:center;
+}
+header,section,footer,aside,nav,article,hgroup{
+    display:block;
+}
+#skin{
+    width:700px;
+    margin:10px auto;
+    padding:5px;
+    border:1px solid black;
+    border-radius:4px;
+}
+nav{
+    margin:5px 0px;
+}
+#buttons{
+    float:left;
+    width:70px;
+    height:22px;
+}
+#defaultBar{
+    position:relative;
+    float:left;
+    width:600px;
+    height:8px;
+    border:1px solid black;
+    border-radius:2px;
+    background:#ffffff;
+}
+/*progressBar在defaultBar内部*/
+#progressBar{
+    position:absolute;
+    width:0;    /*使用javascript控制变化*/
+    height:8px;   /*和defaultBar高度相同*/
+    background:#F7378F;
+}

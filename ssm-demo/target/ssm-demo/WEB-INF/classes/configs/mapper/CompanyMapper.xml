@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myproject.ssm.crm.dal.company.CompanyDAO" >
+  <resultMap id="BaseResultMap" type="com.myproject.ssm.crm.dal.common.object.CompanyDO" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="pycode" property="pycode" jdbcType="VARCHAR" />
+    <result column="grade" property="grade" jdbcType="VARCHAR" />
+    <result column="region_name" property="regionName" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="trade" property="trade" jdbcType="VARCHAR" />
+    <result column="scale" property="scale" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="postcode" property="postcode" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="web" property="web" jdbcType="VARCHAR" />
+    <result column="tel1" property="tel1" jdbcType="VARCHAR" />
+    <result column="fax" property="fax" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="tel2" property="tel2" jdbcType="VARCHAR" />
+    <result column="next_touch_date" property="nextTouchDate" jdbcType="DATE" />
+    <result column="quality" property="quality" jdbcType="VARCHAR" />
+    <result column="dealin" property="dealin" jdbcType="VARCHAR" />
+    <result column="kind" property="kind" jdbcType="VARCHAR" />
+    <result column="artificial_person" property="artificialPerson" jdbcType="VARCHAR" />
+    <result column="registe_money" property="registeMoney" jdbcType="VARCHAR" />
+    <result column="bank" property="bank" jdbcType="VARCHAR" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="tax_code" property="taxCode" jdbcType="VARCHAR" />
+    <result column="creater" property="creater" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="updater" property="updater" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="owner_user" property="ownerUser" jdbcType="INTEGER" />
+    <result column="dispense_person" property="dispensePerson" jdbcType="VARCHAR" />
+    <result column="dispense_date" property="dispenseDate" jdbcType="VARCHAR" />
+    <result column="share_flag" property="shareFlag" jdbcType="CHAR" />
+    <result column="share_ids" property="shareIds" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myproject.ssm.crm.dal.common.object.CompanyDO" extends="BaseResultMap" >
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <resultMap type="com.myproject.ssm.crm.common.domain.ReportBean" id="reportBean">
+  	<result column="grade" property="type" jdbcType="VARCHAR"/>
+  	<result column="count" property="count" jdbcType="BIGINT"/>
+  </resultMap>
+  
+  
+  <sql id="Base_Column_List" >
+    id, code, name, pycode, grade, region_name, source, trade, scale, province, city, 
+    postcode, address, email, web, tel1, fax, mobile, tel2, next_touch_date, quality, 
+    dealin, kind, artificial_person, registe_money, bank, account, tax_code, creater, 
+    create_time, updater, update_time, owner_user, dispense_person, dispense_date, share_flag, 
+    share_ids
+  </sql>
+  <sql id="Blob_Column_List" >
+    remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from c_company
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from c_company
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.myproject.ssm.crm.dal.common.object.CompanyDO" >
+    insert into c_company (id, code, name, 
+      pycode, grade, region_name, 
+      source, trade, scale, 
+      province, city, postcode, 
+      address, email, web, 
+      tel1, fax, mobile, 
+      tel2, next_touch_date, quality, 
+      dealin, kind, artificial_person, 
+      registe_money, bank, account, 
+      tax_code, creater, create_time, 
+      updater, update_time, owner_user, 
+      dispense_person, dispense_date, share_flag, 
+      share_ids, remark)
+    values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{pycode,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}, #{regionName,jdbcType=VARCHAR}, 
+      #{source,jdbcType=VARCHAR}, #{trade,jdbcType=VARCHAR}, #{scale,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{postcode,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{web,jdbcType=VARCHAR}, 
+      #{tel1,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{tel2,jdbcType=VARCHAR}, #{nextTouchDate,jdbcType=DATE}, #{quality,jdbcType=VARCHAR}, 
+      #{dealin,jdbcType=VARCHAR}, #{kind,jdbcType=VARCHAR}, #{artificialPerson,jdbcType=VARCHAR}, 
+      #{registeMoney,jdbcType=VARCHAR}, #{bank,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, 
+      #{taxCode,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{updater,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{ownerUser,jdbcType=INTEGER}, 
+      #{dispensePerson,jdbcType=VARCHAR}, #{dispenseDate,jdbcType=VARCHAR}, #{shareFlag,jdbcType=CHAR}, 
+      #{shareIds,jdbcType=VARCHAR}, #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myproject.ssm.crm.dal.common.object.CompanyDO" >
+    insert into c_company
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="pycode != null" >
+        pycode,
+      </if>
+      <if test="grade != null" >
+        grade,
+      </if>
+      <if test="regionName != null" >
+        region_name,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="trade != null" >
+        trade,
+      </if>
+      <if test="scale != null" >
+        scale,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="postcode != null" >
+        postcode,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="web != null" >
+        web,
+      </if>
+      <if test="tel1 != null" >
+        tel1,
+      </if>
+      <if test="fax != null" >
+        fax,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="tel2 != null" >
+        tel2,
+      </if>
+      <if test="nextTouchDate != null" >
+        next_touch_date,
+      </if>
+      <if test="quality != null" >
+        quality,
+      </if>
+      <if test="dealin != null" >
+        dealin,
+      </if>
+      <if test="kind != null" >
+        kind,
+      </if>
+      <if test="artificialPerson != null" >
+        artificial_person,
+      </if>
+      <if test="registeMoney != null" >
+        registe_money,
+      </if>
+      <if test="bank != null" >
+        bank,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="taxCode != null" >
+        tax_code,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="ownerUser != null" >
+        owner_user,
+      </if>
+      <if test="dispensePerson != null" >
+        dispense_person,
+      </if>
+      <if test="dispenseDate != null" >
+        dispense_date,
+      </if>
+      <if test="shareFlag != null" >
+        share_flag,
+      </if>
+      <if test="shareIds != null" >
+        share_ids,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pycode != null" >
+        #{pycode,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="regionName != null" >
+        #{regionName,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="trade != null" >
+        #{trade,jdbcType=VARCHAR},
+      </if>
+      <if test="scale != null" >
+        #{scale,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null" >
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="web != null" >
+        #{web,jdbcType=VARCHAR},
+      </if>
+      <if test="tel1 != null" >
+        #{tel1,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="tel2 != null" >
+        #{tel2,jdbcType=VARCHAR},
+      </if>
+      <if test="nextTouchDate != null" >
+        #{nextTouchDate,jdbcType=DATE},
+      </if>
+      <if test="quality != null" >
+        #{quality,jdbcType=VARCHAR},
+      </if>
+      <if test="dealin != null" >
+        #{dealin,jdbcType=VARCHAR},
+      </if>
+      <if test="kind != null" >
+        #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="artificialPerson != null" >
+        #{artificialPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="registeMoney != null" >
+        #{registeMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null" >
+        #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="taxCode != null" >
+        #{taxCode,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerUser != null" >
+        #{ownerUser,jdbcType=INTEGER},
+      </if>
+      <if test="dispensePerson != null" >
+        #{dispensePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="dispenseDate != null" >
+        #{dispenseDate,jdbcType=VARCHAR},
+      </if>
+      <if test="shareFlag != null" >
+        #{shareFlag,jdbcType=CHAR},
+      </if>
+      <if test="shareIds != null" >
+        #{shareIds,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myproject.ssm.crm.dal.common.object.CompanyDO" >
+    update c_company
+    <set >
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pycode != null" >
+        pycode = #{pycode,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        grade = #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="regionName != null" >
+        region_name = #{regionName,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="trade != null" >
+        trade = #{trade,jdbcType=VARCHAR},
+      </if>
+      <if test="scale != null" >
+        scale = #{scale,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null" >
+        postcode = #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="web != null" >
+        web = #{web,jdbcType=VARCHAR},
+      </if>
+      <if test="tel1 != null" >
+        tel1 = #{tel1,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        fax = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="tel2 != null" >
+        tel2 = #{tel2,jdbcType=VARCHAR},
+      </if>
+      <if test="nextTouchDate != null" >
+        next_touch_date = #{nextTouchDate,jdbcType=DATE},
+      </if>
+      <if test="quality != null" >
+        quality = #{quality,jdbcType=VARCHAR},
+      </if>
+      <if test="dealin != null" >
+        dealin = #{dealin,jdbcType=VARCHAR},
+      </if>
+      <if test="kind != null" >
+        kind = #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="artificialPerson != null" >
+        artificial_person = #{artificialPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="registeMoney != null" >
+        registe_money = #{registeMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null" >
+        bank = #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="taxCode != null" >
+        tax_code = #{taxCode,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerUser != null" >
+        owner_user = #{ownerUser,jdbcType=INTEGER},
+      </if>
+      <if test="dispensePerson != null" >
+        dispense_person = #{dispensePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="dispenseDate != null" >
+        dispense_date = #{dispenseDate,jdbcType=VARCHAR},
+      </if>
+      <if test="shareFlag != null" >
+        share_flag = #{shareFlag,jdbcType=CHAR},
+      </if>
+      <if test="shareIds != null" >
+        share_ids = #{shareIds,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.myproject.ssm.crm.dal.common.object.CompanyDO" >
+    update c_company
+    set code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      pycode = #{pycode,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=VARCHAR},
+      region_name = #{regionName,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      trade = #{trade,jdbcType=VARCHAR},
+      scale = #{scale,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      postcode = #{postcode,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      web = #{web,jdbcType=VARCHAR},
+      tel1 = #{tel1,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      tel2 = #{tel2,jdbcType=VARCHAR},
+      next_touch_date = #{nextTouchDate,jdbcType=DATE},
+      quality = #{quality,jdbcType=VARCHAR},
+      dealin = #{dealin,jdbcType=VARCHAR},
+      kind = #{kind,jdbcType=VARCHAR},
+      artificial_person = #{artificialPerson,jdbcType=VARCHAR},
+      registe_money = #{registeMoney,jdbcType=VARCHAR},
+      bank = #{bank,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
+      tax_code = #{taxCode,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      owner_user = #{ownerUser,jdbcType=INTEGER},
+      dispense_person = #{dispensePerson,jdbcType=VARCHAR},
+      dispense_date = #{dispenseDate,jdbcType=VARCHAR},
+      share_flag = #{shareFlag,jdbcType=CHAR},
+      share_ids = #{shareIds,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myproject.ssm.crm.dal.common.object.CompanyDO" >
+    update c_company
+    set code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      pycode = #{pycode,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=VARCHAR},
+      region_name = #{regionName,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      trade = #{trade,jdbcType=VARCHAR},
+      scale = #{scale,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      postcode = #{postcode,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      web = #{web,jdbcType=VARCHAR},
+      tel1 = #{tel1,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      tel2 = #{tel2,jdbcType=VARCHAR},
+      next_touch_date = #{nextTouchDate,jdbcType=DATE},
+      quality = #{quality,jdbcType=VARCHAR},
+      dealin = #{dealin,jdbcType=VARCHAR},
+      kind = #{kind,jdbcType=VARCHAR},
+      artificial_person = #{artificialPerson,jdbcType=VARCHAR},
+      registe_money = #{registeMoney,jdbcType=VARCHAR},
+      bank = #{bank,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
+      tax_code = #{taxCode,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      owner_user = #{ownerUser,jdbcType=INTEGER},
+      dispense_person = #{dispensePerson,jdbcType=VARCHAR},
+      dispense_date = #{dispenseDate,jdbcType=VARCHAR},
+      share_flag = #{shareFlag,jdbcType=CHAR},
+      share_ids = #{shareIds,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="getCompanysCondition"  parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from c_company c
+    <if test="sysUserId != null" >
+        where c.owner_user=#{sysUserId}
+    </if>
+    <if test="code != null" >
+        and c.code like CONCAT('%',#{code},'%')
+    </if>
+    <if test="name != null" >
+		and c.name like CONCAT('%',#{name},'%')
+    </if>
+    <if test="pycode != null" >
+		and c.pycode like CONCAT('%',#{pycode},'%')
+    </if>
+    <if test="tel1 != null" >
+		and c.tel1 like CONCAT('%',#{tel1},'%') 
+    </if>
+    <if test="source != null" >
+		and c.source like CONCAT('%',#{source},'%')
+    </if>
+    <if test="grade != null" >
+		and c.grade like CONCAT('%',#{grade},'%') 
+    </if>
+    <if test="quality != null" >
+		and c.quality like CONCAT('%',#{quality},'%') 
+    </if>
+    order by c.id;
+  </select>
+  
+  <select id="getReportBeans" resultMap="reportBean">
+    select grade,count(*) count
+    from c_company
+    group by grade
+  </select>
+  
+</mapper>

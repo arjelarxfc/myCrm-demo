@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myproject.ssm.crm.dal.SysMenuDAO" >
+  <resultMap id="BaseResultMap" type="com.myproject.ssm.crm.dal.common.object.SysMenuDO" >
+    <id column="menu_module" property="menuModule" jdbcType="VARCHAR" />
+    <id column="menu_privilege" property="menuPrivilege" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="target" property="target" jdbcType="VARCHAR" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myproject.ssm.crm.dal.common.object.SysMenuDO" extends="BaseResultMap" >
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    menu_module, menu_privilege, sort, menu_name, title, url, target, icon
+  </sql>
+  <sql id="Blob_Column_List" >
+    remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="com.myproject.ssm.crm.common.domain.SysMenuKey" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_menu
+    where menu_module = #{menuModule,jdbcType=VARCHAR}
+      and menu_privilege = #{menuPrivilege,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.myproject.ssm.crm.common.domain.SysMenuKey" >
+    delete from sys_menu
+    where menu_module = #{menuModule,jdbcType=VARCHAR}
+      and menu_privilege = #{menuPrivilege,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.myproject.ssm.crm.dal.common.object.SysMenuDO" >
+    insert into sys_menu (menu_module, menu_privilege, sort, 
+      menu_name, title, url, 
+      target, icon, remark
+      )
+    values (#{menuModule,jdbcType=VARCHAR}, #{menuPrivilege,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+      #{menuName,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{target,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{remark,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myproject.ssm.crm.dal.common.object.SysMenuDO" >
+    insert into sys_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="menuModule != null" >
+        menu_module,
+      </if>
+      <if test="menuPrivilege != null" >
+        menu_privilege,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="menuName != null" >
+        menu_name,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="target != null" >
+        target,
+      </if>
+      <if test="icon != null" >
+        icon,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="menuModule != null" >
+        #{menuModule,jdbcType=VARCHAR},
+      </if>
+      <if test="menuPrivilege != null" >
+        #{menuPrivilege,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="menuName != null" >
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="target != null" >
+        #{target,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null" >
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myproject.ssm.crm.dal.common.object.SysMenuDO" >
+    update sys_menu
+    <set >
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="menuName != null" >
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="target != null" >
+        target = #{target,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null" >
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where menu_module = #{menuModule,jdbcType=VARCHAR}
+      and menu_privilege = #{menuPrivilege,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.myproject.ssm.crm.dal.common.object.SysMenuDO" >
+    update sys_menu
+    set sort = #{sort,jdbcType=INTEGER},
+      menu_name = #{menuName,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      target = #{target,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where menu_module = #{menuModule,jdbcType=VARCHAR}
+      and menu_privilege = #{menuPrivilege,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myproject.ssm.crm.dal.common.object.SysMenuDO" >
+    update sys_menu
+    set sort = #{sort,jdbcType=INTEGER},
+      menu_name = #{menuName,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      target = #{target,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR}
+    where menu_module = #{menuModule,jdbcType=VARCHAR}
+      and menu_privilege = #{menuPrivilege,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="findAllSysMenus" resultMap="ResultMapWithBLOBs">
+  	select 
+  	<include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_menu
+  </select>
+  
+</mapper>

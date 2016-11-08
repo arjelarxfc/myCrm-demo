@@ -1,0 +1,137 @@
+html,body{
+  overflow:hidden;
+
+}
+html ::-webkit-scrollbar {
+  width:5px;
+  height:8px;
+}
+html ::-webkit-scrollbar-button       {  display: none; }
+html ::-webkit-scrollbar-track        { background:#1B1B1B;}
+html ::-webkit-scrollbar-track-piece  {}
+html ::-webkit-scrollbar-thumb {
+  background:#F50B86;
+  border-radius:4px;
+}
+html ::-webkit-scrollbar-corner       { background:#1B1B1B; }
+html ::-webkit-resizer                { background:#1B1B1B; }
+
+.transparent_class {
+  /* Required for IE 5, 6, 7 */
+  /* ...or something to trigger hasLayout, like zoom: 1; */
+  width:300px;
+  height:300px;
+  line-height:300px;
+  text-align:center;
+  background:#000;
+  color:#fff;
+  /* older safari/Chrome browsers */
+  -webkit-opacity: 0.5;
+  /* Netscape and Older than Firefox 0.9 */
+  -moz-opacity: 0.5;
+  /* Safari 1.x (pre WebKit!) 老式khtml内核的Safari浏览器*/
+  -khtml-opacity: 0.5;
+  /* IE9 + etc...modern browsers */
+  opacity: .5;
+  /* IE 4-9 */
+  filter:alpha(opacity=50);
+  /*This works in IE 8 & 9 too*/
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  /*IE4-IE9*/
+  filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+}
+#test{
+  background-color:#0000CC;
+  filter:alpha(opacity=50);
+  -moz-opacity:0.5;
+  opacity:0.5;
+  width:100px;
+  height:100px;
+}
+body, .navbar-fixed-top, .container{
+    min-width: 970px;
+}
+.navigation{
+  margin:0;
+  background-color:#1B1B1B;
+  border:0;
+  position: fixed;
+  z-index:102;
+  width:40px;
+  height: 100%;
+}
+.active{
+  color:#ffffff;background-color:#1B1B1B; border-right: 1px solid #F50B86;
+}
+ul.navigation li{
+  width: 40px;
+  height: 25%;
+  color:#ffffff;
+  word-wrap:break-word;
+  word-break:nomal;
+  background-color:#1B1B1B;
+}
+ul.navigation a{
+  color:#6B6B6B;
+  padding-top: 30px;
+  font-weight: normal;
+  font-size: 14px;
+  text-decoration: none;
+  height: 100%;
+}
+div.navigation a:link    {color:#ffffff;background-color:#1B1B1B;}
+div.navigation a:visited {color:#ffffff;background-color:#1B1B1B;}
+div.navigation a:hover   {color:#ffffff;background-color:#1B1B1B; border-right: 1px solid #F50B86;}
+div.navigation a:active  {color:#ffffff;background-color:#1B1B1B; border-right: 1px solid #F50B86;}
+.opacityDiv{
+  width:100%;
+  height: 100%;
+  background-color:rgb(2,2,2);filter:alpha(opacity=30,style=0);
+  opacity:0.7;
+  z-index:100;
+  left:0;
+  margin-top:0;
+  position:absolute;
+}
+
+#imgDiv1{
+  position:absolute;
+  background-image:url(../image/original/firstP1.jpg);
+  background-attachment:scroll;
+  background-repeat:repeat;
+  width:100%;
+  height:100%;
+  background-size:110% 110%;
+  background-position:0 -40px;
+}
+#imgDiv3{
+  position:absolute;
+  background-image:url(../image/original/firstP1.jpg);
+  background-attachment:scroll;
+  background-repeat:repeat;
+  width:100%;
+  height:100%;
+  background-size:100% 100%;
+}
+#imgDiv4{
+  position:absolute;
+  background-image:url(../image/highDef/4.jpg);
+  background-attachment:scroll;
+  background-repeat:repeat;
+  width:100%;
+  height:100%;
+  background-size:110% 110%;
+  background-position:10% -40px;
+}
+
+.inner{
+  width:100%;
+  height:100%;
+  padding-left: 40px;
+  -moz-box-sizing:border-box; /* Firefox */
+  -webkit-box-sizing:border-box; /* Safari */
+  box-sizing:border-box;
+
+  overflow: auto;
+  background-color: #1B1B1B;
+}

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myproject.ssm.crm.dal.SysPopedomPrivilegeDAO">
+
+  <resultMap id="BaseResultMap" type="com.myproject.ssm.crm.dal.common.object.SysPopedomPrivilegeDO">
+    <id column="role_id" jdbcType="VARCHAR" property="roleId" />
+    <id column="popedom_module" jdbcType="VARCHAR" property="popedomModule" />
+    <id column="popedom_privilege" jdbcType="VARCHAR" property="popedomPrivilege" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    role_id,popedom_module,popedom_privilege
+  </sql>
+  
+  <delete id="deleteByPrimaryKey" parameterType="_SysPopedomPrivilegeDO">
+    delete from sys_popedom_privilege
+    where role_id = #{roleId,jdbcType=VARCHAR}
+      <if test="popedomModule != null">
+	      and popedom_module = #{popedomModule,jdbcType=VARCHAR}
+      </if>
+      <if test="popedomPrivilege != null">
+	      and popedom_privilege = #{popedomPrivilege,jdbcType=VARCHAR}
+      </if>
+  </delete>
+  
+  <insert id="insert" parameterType="_SysPopedomPrivilegeDO">
+    insert into sys_popedom_privilege (role_id, popedom_module, popedom_privilege
+      )
+    values (#{roleId,jdbcType=VARCHAR}, #{popedomModule,jdbcType=VARCHAR}, #{popedomPrivilege,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <insert id="insertSelective" parameterType="_SysPopedomPrivilegeDO">
+    insert into sys_popedom_privilege
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="popedomModule != null">
+        popedom_module,
+      </if>
+      <if test="popedomPrivilege != null">
+        popedom_privilege,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="popedomModule != null">
+        #{popedomModule,jdbcType=VARCHAR},
+      </if>
+      <if test="popedomPrivilege != null">
+        #{popedomPrivilege,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  
+  <select id="selectAllPopedomPrivileges" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_popedom_privilege
+  </select>
+  
+   <select id="selectPopedomPrivilegeByRoleid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_popedom_privilege
+    where role_id=#{roleId,jdbcType=VARCHAR}
+  </select>
+  
+  <insert id="insertPopePrivList" parameterType="java.util.List">
+  	insert into sys_popedom_privilege (role_id, popedom_module, popedom_privilege)
+  	values 
+  	<foreach collection="list" item="item" index="index" separator="," >  
+  		(#{item.roleId},#{item.popedomModule},#{item.popedomPrivilege})
+  	</foreach>
+  </insert>
+  <delete id="delPopedomPrivileges" parameterType="java.util.List" >
+  	delete from sys_popedom_privilege
+  	<where>
+  		<foreach collection="list" item="item" index="index" open="(" separator="or" close=")">  
+  			role_id=#{item.roleId} 
+  			and popedom_module=#{item.popedomModule} 
+  			and popedom_privilege=#{item.popedomPrivilege} 
+  		</foreach>
+	</where>  	
+  </delete>
+  
+</mapper>

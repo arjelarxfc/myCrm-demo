@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myproject.ssm.crm.dal.SysPopedomDAO">
+  
+  <resultMap id="BaseResultMap" type="com.myproject.ssm.crm.dal.common.object.SysPopedomDO">
+    <id column="popedom_module" jdbcType="VARCHAR" property="popedomModule" />
+    <id column="popedom_privilege" jdbcType="VARCHAR" property="popedomPrivilege" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="popedom_name" jdbcType="VARCHAR" property="popedomName" />
+  </resultMap>
+  
+  <resultMap id="ResultMapWithBLOBs" type="com.myproject.ssm.crm.dal.common.object.SysPopedomDO" extends="BaseResultMap">
+    <result column="remark" jdbcType="LONGVARCHAR" property="remark" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    popedom_module, popedom_privilege, sort, title, popedom_name
+  </sql>
+  
+  <sql id="Blob_Column_List">
+    remark
+  </sql>
+  
+  <select id="selectByPrimaryKey" parameterType="com.myproject.ssm.crm.common.domain.SysPopedomKey" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_popedom
+    where popedom_module = #{popedomModule,jdbcType=VARCHAR}
+      and popedom_privilege = #{popedomPrivilege,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="com.myproject.ssm.crm.common.domain.SysPopedomKey">
+    delete from sys_popedom
+    where popedom_module = #{popedomModule,jdbcType=VARCHAR}
+      and popedom_privilege = #{popedomPrivilege,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.myproject.ssm.crm.dal.common.object.SysPopedomDO">
+    insert into sys_popedom (popedom_module, popedom_privilege, 
+      sort, title, popedom_name, 
+      remark)
+    values (#{popedomModule,jdbcType=VARCHAR}, #{popedomPrivilege,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{popedomName,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.myproject.ssm.crm.dal.common.object.SysPopedomDO">
+    insert into sys_popedom
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="popedomModule != null">
+        popedom_module,
+      </if>
+      <if test="popedomPrivilege != null">
+        popedom_privilege,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="popedomName != null">
+        popedom_name,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="popedomModule != null">
+        #{popedomModule,jdbcType=VARCHAR},
+      </if>
+      <if test="popedomPrivilege != null">
+        #{popedomPrivilege,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="popedomName != null">
+        #{popedomName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.myproject.ssm.crm.dal.common.object.SysPopedomDO">
+    update sys_popedom
+    <set>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="popedomName != null">
+        popedom_name = #{popedomName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where popedom_module = #{popedomModule,jdbcType=VARCHAR}
+      and popedom_privilege = #{popedomPrivilege,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.myproject.ssm.crm.dal.common.object.SysPopedomDO">
+    update sys_popedom
+    set sort = #{sort,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      popedom_name = #{popedomName,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where popedom_module = #{popedomModule,jdbcType=VARCHAR}
+      and popedom_privilege = #{popedomPrivilege,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.myproject.ssm.crm.dal.common.object.SysPopedomDO">
+    update sys_popedom
+    set sort = #{sort,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      popedom_name = #{popedomName,jdbcType=VARCHAR}
+    where popedom_module = #{popedomModule,jdbcType=VARCHAR}
+      and popedom_privilege = #{popedomPrivilege,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectAllPopedoms" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_popedom
+  </select>
+  
+  <select id="findAllModules" resultType="String">
+  	select distinct popedom_module from sys_popedom
+  </select>
+  
+</mapper>

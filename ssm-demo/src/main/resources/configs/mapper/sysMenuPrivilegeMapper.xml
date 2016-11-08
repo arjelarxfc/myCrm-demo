@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myproject.ssm.crm.dal.SysMenuPrivilegeDAO" >
+
+  <resultMap id="BaseResultMap" type="com.myproject.ssm.crm.dal.common.object.SysMenuPrivilegeDO" >
+    <id column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <id column="menu_module" property="menuModule" jdbcType="VARCHAR" />
+    <id column="menu_privilege" property="menuPrivilege" jdbcType="VARCHAR" />
+    <!-- A collection of menuPrivileges in an ArrayList of type String -->
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    role_id,menu_module,menu_privilege
+  </sql>
+  
+  <delete id="deleteByPrimaryKey" parameterType="com.myproject.ssm.crm.dal.common.object.SysMenuPrivilegeDO" >
+    delete from sys_menu_privilege
+    where role_id = #{roleId,jdbcType=VARCHAR}
+      <if test="menuModule !=null">
+	      and menu_module = #{menuModule,jdbcType=VARCHAR}
+      </if>
+      <if test="menuPrivilege != null">
+	      and menu_privilege = #{menuPrivilege,jdbcType=VARCHAR}
+      </if>
+  </delete>
+  
+  <insert id="insert" parameterType="com.myproject.ssm.crm.dal.common.object.SysMenuPrivilegeDO" >
+    insert into sys_menu_privilege (role_id, menu_module, menu_privilege
+      )
+    values (#{roleId,jdbcType=VARCHAR}, #{menuModule,jdbcType=VARCHAR}, #{menuPrivilege,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.myproject.ssm.crm.dal.common.object.SysMenuPrivilegeDO" >
+    insert into sys_menu_privilege
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="menuModule != null" >
+        menu_module,
+      </if>
+      <if test="menuPrivilege != null" >
+        menu_privilege,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuModule != null" >
+        #{menuModule,jdbcType=VARCHAR},
+      </if>
+      <if test="menuPrivilege != null" >
+        #{menuPrivilege,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="queryById" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	SELECT <include refid="Base_Column_List"/> 
+  	FROM sys_menu_privilege 
+  	WHERE role_id= #{roleId,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="findAllSysMenuPrivileges" resultMap="BaseResultMap">
+  	SELECT <include refid="Base_Column_List"/> 
+  	FROM sys_menu_privilege 
+  </select>
+  
+  <insert id="insertMenuPrivList" parameterType="java.util.List">
+    insert into sys_menu_privilege (role_id, menu_module, menu_privilege)
+    values 
+    <foreach collection="list" item="item" index="index" separator="," >  
+        (#{item.roleId},#{item.menuModule},#{item.menuPrivilege})  
+    </foreach>
+  </insert>
+  
+  <delete id="delMenuPrivileges" parameterType="java.util.List" >
+    delete from sys_menu_privilege 
+    <where>
+		<foreach collection="list" item="item" index="index" open="(" separator="or" close=")">  
+			role_id=#{item.roleId} 
+			and menu_module=#{item.menuModule} 
+			and menu_privilege=#{item.menuPrivilege}
+		</foreach>
+	</where> 
+  </delete>
+  
+</mapper>
